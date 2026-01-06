@@ -8,6 +8,7 @@ class HabitModel {
   int colorCode; // Lưu màu dưới dạng số nguyên (VD: 0xFF4CAF50)
   List<DateTime> completedDays; // Danh sách các ngày đã hoàn thành
   DateTime createdAt;
+  String? reminderTime;
 
   HabitModel({
     required this.id,
@@ -17,6 +18,7 @@ class HabitModel {
     this.colorCode = 0xFF2196F3, // Mặc định màu xanh dương
     this.completedDays = const [],
     required this.createdAt,
+    this.reminderTime,
   });
 
   // Chuyển từ JSON (Firestore) -> Object Dart
@@ -33,6 +35,7 @@ class HabitModel {
           .toList() ??
           [],
       createdAt: (json['createdAt'] as Timestamp).toDate(),
+      reminderTime: json['reminderTime'],
     );
   }
 
@@ -45,6 +48,7 @@ class HabitModel {
       'colorCode': colorCode,
       'completedDays': completedDays, // Firestore tự hiểu List<DateTime>
       'createdAt': createdAt,
+      'reminderTime': reminderTime,
     };
   }
 
